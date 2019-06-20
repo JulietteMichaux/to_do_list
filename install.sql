@@ -1,0 +1,6 @@
+CREATE TABLE tasks (
+ id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ category VARCHAR(225),
+ title VARCHAR(255),
+ description TEXT
+);
