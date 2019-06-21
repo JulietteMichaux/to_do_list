@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
-import axios from 'axios';
+/*import axios from 'axios';*/
 import { connect } from 'react-redux';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
 
 function Todo(props) {
 
-
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
+  /*useEffect(() => {
     axios.get('http://localhost:3000/todo')
     .then((result) => {
       setTasks(result.data);
     })
-  }, [])
+  }, [])*/
 
   return (
     <div className='container'>
       <div className='row'>
         <div className='col-10 offset-1'>
-          {props.tasks.map((task, index) => {
+          {props.tasks.filter(task => task.category === 'todo').map((task, index) => {
             return(
               <div>
                 <div className="alert alert-danger" role="alert">

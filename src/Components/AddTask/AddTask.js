@@ -7,6 +7,9 @@ function AddTask(props) {
 
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
+  const [category, setCategory] = useState('todo');
+  
+
   /*const [listTasks, setListTasks] = useState([]);
 
   /*const addTask = () => {
@@ -45,12 +48,24 @@ function AddTask(props) {
                 onChange={(event) => setDesc(event.target.value)}
               />
             </div>
+            <br/>
+            <div className='row'>
+              <label for="exampleFormControlSelect2">Catégorie de la tâche</label>
+                <select 
+                  className="form-control form-control-lg"
+                  onChange={(event) => setCategory(event.target.value)}>
+                  <option value='todo'>à faire</option>
+                  <option value='doing'>en cours</option>
+                  <option value='done'>fait</option>
+                </select>
+            </div>
             <br />
             <div className='row'>
               <div className='col-2 offset-10'>
                 <button
                   className="btn btn-success"
-                  onClick={() => props.dispatch(addTaskToToDoList({title : title, desc : desc}))}
+                  onClick={() => 
+                    {props.dispatch(addTaskToToDoList({title : title, desc : desc, category : category}))}}
                   >              
                   Ajouter
                 </button>

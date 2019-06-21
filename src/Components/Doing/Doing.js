@@ -8,7 +8,7 @@ function Doing(props) {
     <div className='container'>
       <div className='row'>
         <div className='col-10 offset-1'>
-          {props.tasks.map((task, index) => {
+          {props.tasks.filter(task => task.category === 'doing').map((task, index) => {
             return(
               <div>
                 <div className="alert alert-info" role="alert">
