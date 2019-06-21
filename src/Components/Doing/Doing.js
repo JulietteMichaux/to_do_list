@@ -17,7 +17,7 @@ function Doing(props) {
                 </div>
                 <div className='col-2 offset-10'>
                   <button
-                    className="btn btn-success"
+                    className="btn btn-secondary"
                     onClick={() => props.dispatch(removeTaskFromToDoList(index))}
                     >
                     Supprimer

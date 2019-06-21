@@ -26,8 +26,20 @@ function AddTask(props) {
       <div className='row'>
         <div className='col-10 offset-1'>
           <div className="card-body">
+          <div className='row'>
+              <label for="exampleFormControlSelect2" className='text-black font-weight-bold'>Catégorie de la tâche</label>
+                <select 
+                  className="form-control form-control-alternative"
+                  onChange={(event) => setCategory(event.target.value)}
+                >
+                  <option value='todo'>à faire</option>
+                  <option value='doing'>en cours</option>
+                  <option value='done'>fait</option>
+                </select>
+            </div>
+            <br />
             <div className='row'>
-            <h6 class="card-title">Ajout d'une tâche</h6>
+            <h6 class="card-title text-black font-weight-bold">Ajout d'une tâche</h6>
             </div>
             <div className='row'>
               <input 
@@ -49,17 +61,6 @@ function AddTask(props) {
               />
             </div>
             <br/>
-            <div className='row'>
-              <label for="exampleFormControlSelect2">Catégorie de la tâche</label>
-                <select 
-                  className="form-control form-control-lg"
-                  onChange={(event) => setCategory(event.target.value)}>
-                  <option value='todo'>à faire</option>
-                  <option value='doing'>en cours</option>
-                  <option value='done'>fait</option>
-                </select>
-            </div>
-            <br />
             <div className='row'>
               <div className='col-2 offset-10'>
                 <button

@@ -13,12 +13,12 @@ function App(props) {
   return (
     <div>
       <NavigationBar />
+      <AddTask />
+      <br />
        <Route exact path="/" component={Home} />
         <Route path="/todo" component={Todo} />
         <Route path="/doing" component={Doing} />
         <Route path="/done" component={Done} />
-        <br />
-      <AddTask />
     </div>
   );
 }
