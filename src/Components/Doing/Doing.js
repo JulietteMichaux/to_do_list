@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Doing.css';
 import { connect } from 'react-redux';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
 
 function Doing(props) {
+
+  const [listDoing, setListDoing] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/doing')
+    .then((result) => {
+      setListDoing(result.data);
+    })
+  }, [])
+
   return (
     <div className='container'>
       <div className='row'>

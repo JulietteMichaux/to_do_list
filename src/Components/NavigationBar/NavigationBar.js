@@ -7,7 +7,7 @@ function NavigationBar() {
     <div className='container'>
       <div className='row'>
         <div className='col-12'>
-          <div class="alert alert-warning text-center font-weight-bold text-wrap" role="alert">
+          <div className="alert alert-warning text-center font-weight-bold text-wrap" role="alert">
             TAF
           </div>
         </div>
@@ -40,7 +40,7 @@ function NavigationBar() {
                   href="#tabs-icons-text-2" 
                   role="tab" 
                   aria-controls="tabs-icons-text-2" 
-                  aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>
+                  aria-selected="false"><i className="ni ni-bell-55 mr-2"></i>
                   En cours
                 </Link>
               </li>
@@ -52,7 +52,7 @@ function NavigationBar() {
                   href="#tabs-icons-text-3" 
                   role="tab" 
                   aria-controls="tabs-icons-text-3" 
-                  aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>
+                  aria-selected="false"><i className="ni ni-calendar-grid-58 mr-2"></i>
                   Fait
                 </Link>
               </li>

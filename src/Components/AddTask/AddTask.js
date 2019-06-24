@@ -8,18 +8,6 @@ function AddTask(props) {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [category, setCategory] = useState('todo');
-  
-
-  /*const [listTasks, setListTasks] = useState([]);
-
-  /*const addTask = () => {
-    const Task = {
-      title : title,
-      desc : desc
-    }
-    setListTasks([...listTasks, Task]) 
-    console.log(listTasks)
-  }*/
 
   return (
     <div className='container'>
@@ -29,6 +17,7 @@ function AddTask(props) {
           <div className='row'>
               <label for="exampleFormControlSelect2" className='text-black font-weight-bold'>Catégorie de la tâche</label>
                 <select 
+                  method="POST" action='/todo'
                   className="form-control form-control-alternative"
                   onChange={(event) => setCategory(event.target.value)}
                 >

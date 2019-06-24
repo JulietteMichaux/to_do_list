@@ -15,10 +15,10 @@ function App(props) {
       <NavigationBar />
       <AddTask />
       <br />
-       <Route exact path="/" component={Home} />
-        <Route path="/todo" component={Todo} />
-        <Route path="/doing" component={Doing} />
-        <Route path="/done" component={Done} />
+      <Route exact path="/" component={Home} />
+      <Route path="/todo" component={Todo} />
+      <Route path="/doing" component={Doing} />
+      <Route path="/done" component={Done} />
     </div>
   );
 }

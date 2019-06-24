@@ -4,6 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { setTodo } from './Utils/storageTodo';
 
 //CSS
 import './argon.min.css';
@@ -12,6 +13,13 @@ import './index.css';
 // REDUCERS import
 import todoReducer from './Reducers/todoReducer';
 
+function recover({getState}) {
+  return next =>  action  => {
+    const returnValue = next(action);
+    setTodo(getState());
+    return returnValue();
+  }
+}
 
 const store = createStore(
     todoReducer,

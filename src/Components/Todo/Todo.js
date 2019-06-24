@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
-/*import axios from 'axios';*/
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
 
 function Todo(props) {
 
-  /*useEffect(() => {
-    axios.get('http://localhost:3000/todo')
+  const [listTodo, setListTodo] = useState([]);
+  
+    useEffect(() => {
+    axios.get('http://localhost:8000/tasks')
     .then((result) => {
-      setTasks(result.data);
-    })
-  }, [])*/
+      console.log(result.data);
+      setListTodo(result.data);
+     })
+    }, [])
 
   return (
     <div className='container'>
