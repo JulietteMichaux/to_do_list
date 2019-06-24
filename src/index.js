@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { setTodo } from './Utils/storageTodo';
+import axios from 'axios';
 
 //CSS
 import './argon.min.css';
@@ -13,13 +14,14 @@ import './index.css';
 // REDUCERS import
 import todoReducer from './Reducers/todoReducer';
 
-function recover({getState}) {
-  return next =>  action  => {
-    const returnValue = next(action);
-    setTodo(getState());
-    return returnValue();
-  }
-}
+// import d'une action
+import { initTasksToDoList } from './Action/todoActions';
+
+axios.get('http://localhost:8000/tasks')
+    .then((result) => {
+      console.log(result);
+    store.dispatch(initTasksToDoList(result.data));
+    })
 
 const store = createStore(
     todoReducer,

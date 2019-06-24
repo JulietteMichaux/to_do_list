@@ -6,7 +6,7 @@ import { addTaskToToDoList } from '../../Action/todoActions';
 function AddTask(props) {
 
   const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
+  const [description, setDescription] = useState('');
   const [category, setCategory] = useState('todo');
 
   return (
@@ -17,7 +17,6 @@ function AddTask(props) {
           <div className='row'>
               <label for="exampleFormControlSelect2" className='text-black font-weight-bold'>Catégorie de la tâche</label>
                 <select 
-                  method="POST" action='/todo'
                   className="form-control form-control-alternative"
                   onChange={(event) => setCategory(event.target.value)}
                 >
@@ -45,8 +44,8 @@ function AddTask(props) {
                 className="form-control form-control-alternative bg-secondary" 
                 placeholder="description" 
                 type="text"
-                value={desc}
-                onChange={(event) => setDesc(event.target.value)}
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
               />
             </div>
             <br/>
@@ -55,7 +54,7 @@ function AddTask(props) {
                 <button
                   className="btn btn-success"
                   onClick={() => 
-                    {props.dispatch(addTaskToToDoList({title : title, desc : desc, category : category}))}}
+                    {props.dispatch(addTaskToToDoList({title : title, description : description, category : category}))}}
                   >              
                   Ajouter
                 </button>

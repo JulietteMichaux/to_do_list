@@ -6,15 +6,6 @@ import { removeTaskFromToDoList } from '../../Action/todoActions';
 
 function Done(props) {
 
-  const [listDone, setListDone] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:3000/done')
-    .then((result) => {
-      setListDone(result.data);
-    })
-  }, [])
-
   return (
     <div className='container'>
       <div className='row'>
@@ -24,7 +15,7 @@ function Done(props) {
               <div>
                 <div className="alert alert-success" role="alert">
                   <h3 className='card-title text-white'>{task.title}</h3>
-                  <p className='card-text'>{task.desc}</p> 
+                  <p className='card-text'>{task.description}</p> 
                 </div>
                 <div className='col-2 offset-10'>
                   <button

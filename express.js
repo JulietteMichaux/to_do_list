@@ -15,7 +15,6 @@ app.use((req, res, next) => {
   next();
 })
 
-
 app.post('/tasks', (req, res) => {
   const formData = req.body;
   console.log(formData);
@@ -25,7 +24,6 @@ app.post('/tasks', (req, res) => {
       res.status(500).send('Sauvegarde in tasks impossb');
     } else {
       res.json(results);
-      res.sendStatus(200);
     }
   });
 });
@@ -38,7 +36,6 @@ app.get('/tasks', (req, res) => {
     res.status(500).send('error dans la récupération des todo');
    } else {
       res.json(results);
-      releaseEvents.sendStatus(200);
     }
     });
 });
@@ -52,24 +49,14 @@ app.get('/tasks/:id', (req, res) => {
       res.status(500).send('todo par id non récupérée');
     } else {
       res.json(results);
-      res.sendStatus(200);
     }
   });
 });
 
-/*app.delete('/tasks/:id'), (req, res) => {
-  const idTodo = req.params.id
-  const formData = req.body
-  connection.query(`DELETE FROM tasks WHERE id = ${idTodo}`, [formData], (err, results) => {
-  if (err) {
-    console.log(err);
-    res.status(500).send('todo par id non supprimée');
-  } else {
-    console.log(results);
-    res.sendStatus(200);
-    }
+app.delete('/tasks', (req, res) => {
+  connection.query('SELECT * FROM tasks', (err, results) => {
   });
-};*/
+});
 
 app.put('/tasks', (req, res) => {
   const idTodo = req.params.id;
@@ -80,7 +67,6 @@ app.put('/tasks', (req, res) => {
     res.status(500).send('erreur de modif');
   } else {
     res.json(results);
-    res.sendStatus(200);
   }
   });
 });

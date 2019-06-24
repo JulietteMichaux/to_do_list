@@ -7,3 +7,8 @@ export const removeTaskFromToDoList = index => ({
   type: 'REMOVE_TASK',
   payload: index
 });
+
+export const initTasksToDoList = (tasks) => ({
+  type : 'INIT_TASKS',
+  payload: tasks
+});

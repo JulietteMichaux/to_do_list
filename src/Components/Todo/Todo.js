@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
 
 function Todo(props) {
-
-  const [listTodo, setListTodo] = useState([]);
   
-    useEffect(() => {
-    axios.get('http://localhost:8000/tasks')
-    .then((result) => {
-      console.log(result.data);
-      setListTodo(result.data);
-     })
-    }, [])
-
   return (
     <div className='container'>
       <div className='row'>
@@ -25,7 +14,7 @@ function Todo(props) {
               <div>
                 <div className="alert alert-danger" role="alert">
                   <h3 className='card-title text-white'>{task.title}</h3>
-                  <p className='card-text'>{task.desc}</p> 
+                  <p className='card-text'>{task.description}</p> 
                 </div>
                 <div className='col-2 offset-10'>
                   <button

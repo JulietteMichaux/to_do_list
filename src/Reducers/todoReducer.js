@@ -9,6 +9,8 @@ const todoReducer = (state = [], action) => {
         ...state.slice(0, action.payload),
         ...state.slice(action.payload+ 1)
       ];
+      case 'INIT_TASKS':
+      return action.payload;
     default:
       return state;
   }
