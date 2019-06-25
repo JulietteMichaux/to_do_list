@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './AddTask.css';
 import { addTaskToToDoList } from '../../Action/todoActions';
+import axios from 'axios';
 
 function AddTask(props) {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('todo');
+
+  const submitTask = () => {
+    axios.post('http://localhost:8000/tasks', {
+      category: category,
+      title: title,
+      description: description
+    })
+  }
 
   return (
     <div className='container'>
@@ -53,8 +62,10 @@ function AddTask(props) {
               <div className='col-2 offset-10'>
                 <button
                   className="btn btn-success"
-                  onClick={() => 
-                    {props.dispatch(addTaskToToDoList({title : title, description : description, category : category}))}}
+                  onClick={() => {
+                    props.dispatch(addTaskToToDoList({title : title, description : description, category : category}))
+                    submitTask()
+                  }}
                   >              
                   Ajouter
                 </button>

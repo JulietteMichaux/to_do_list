@@ -4,7 +4,6 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { setTodo } from './Utils/storageTodo';
 import axios from 'axios';
 
 //CSS
@@ -24,7 +23,7 @@ axios.get('http://localhost:8000/tasks')
     })
 
 const store = createStore(
-    todoReducer,
+    todoReducer, 
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
