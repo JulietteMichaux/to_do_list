@@ -23,16 +23,7 @@ function NavigationBar() {
               <li className="nav-item">
                 <NavLink 
                   to='/todo' 
-                  
-                  /*NavLink
-                  aria-selected={navPills === 2}
-                  className={classnames('mb-sm-3 mb-md-0', {
-                    active: navPills === 2,
-                  })}
-                  onClick={e => toggleNavs(e, 'Chapitre', 2)}
-                  href="#"
-                  role="tab"*/
-
+                  activeClassName='active-link'
                   className="nav-link mb-sm-3 mb-md-0 nav-link-info bg-danger text-white font-weight-bold" 
                   id="tabs-icons-text-1-tab" 
                   data-toggle="tab" 
@@ -45,19 +36,23 @@ function NavigationBar() {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink activeClassName="active" to='/doing' 
+                <NavLink 
+                  to='/doing' 
+                  activeClassName='active-link'
                   className="nav-link mb-sm-3 mb-md-0 bg-info text-white font-weight-bold" 
                   id="tabs-icons-text-2-tab" 
                   data-toggle="tab" 
                   href="#tabs-icons-text-2" 
                   role="tab" 
                   aria-controls="tabs-icons-text-2" 
-                  aria-selected="false"><i className="ni ni-bell-55 mr-2"></i>
+                  ><i className="ni ni-bell-55 mr-2"></i>
                   En cours
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink activeClassName="active" to='/done' 
+                <NavLink 
+                  to='/done' 
+                  activeClassName='active-link'
                   className="nav-link mb-sm-3 mb-md-0 bg-success text-white font-weight-bold" 
                   id="tabs-icons-text-3-tab" 
                   data-toggle="tab" 

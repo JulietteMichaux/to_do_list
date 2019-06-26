@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Todo.css';
 import { connect } from 'react-redux';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
+import axios from 'axios';
 
 function Todo(props) {
+  
+  const [id, setId] = useState(0);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('todo');
+
+  const deleteTask = (id) => {
+    console.log(id);
+    axios.delete(`http://localhost:8000/tasks/${id}`)
+  }
   
   return (
     <div className='container'>
@@ -19,7 +30,10 @@ function Todo(props) {
                 <div className='col-2 offset-10'>
                   <button
                     className="btn btn-secondary"
-                    onClick={() => props.dispatch(removeTaskFromToDoList(index))}
+                    onClick={() => {
+                      props.dispatch(removeTaskFromToDoList(index))
+                      deleteTask(task.id)
+                    }}
                     >        
                     Supprimer
                   </button>

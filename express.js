@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  /*res.header('Access-Control-Allow-Methods', GET, POST, DELETE, PUT);*/
+  res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
   res.header('Access-Control-Allow-Headers', 'Origin, Content-Type');
   next();
 })
@@ -32,7 +32,7 @@ app.post('/tasks', (req, res) => {
 
 app.get('/tasks', (req, res) => {
   connection.query('SELECT * FROM tasks', (err, results) => {
-  console.log(results);
+  /*console.log(results);*/
   if (err) {
     console.log(err);
     res.status(500).send('error dans la récupération des todo');
@@ -55,12 +55,19 @@ app.get('/tasks/:id', (req, res) => {
   });
 });
 
-app.delete('/tasks', (req, res) => {
-  connection.query('SELECT * FROM tasks', (err, results) => {
+app.delete('/tasks/:id', (req, res) => {
+  const idTasks = req.params.id
+  console.log(idTasks);
+  connection.query(`DELETE FROM tasks WHERE id = ${idTasks}`, err => {
+    if (err){
+      res.status(500).send('smurf');
+    } else {
+      res.sendStatus(200);
+    }
   });
 });
 
-app.put('/tasks', (req, res) => {
+app.put('/tasks/:id', (req, res) => {
   const idTodo = req.params.id;
   const formData = req.body;
   console.log(formData);
