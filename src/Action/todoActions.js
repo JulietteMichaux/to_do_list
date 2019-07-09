@@ -8,7 +8,16 @@ export const removeTaskFromToDoList = index => ({
   payload: index
 });
 
-export const initTasksToDoList = (tasks) => ({
+export const initTasksToDoList = tasks => ({
   type : 'INIT_TASKS',
   payload: tasks
 });
+
+export const updateCategory = data => ({
+  type : 'UPDATE_TASK',
+  payload : data
+})
+
+
+
+

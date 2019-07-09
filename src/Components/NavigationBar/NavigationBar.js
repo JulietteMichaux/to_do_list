@@ -1,7 +1,6 @@
 import React from 'react';
 import './NavigationBar.css';
-import { NavLink } from 'react-router-dom';
-import { brotliDecompress } from 'zlib';
+import { Link } from 'react-router-dom';
 
 function NavigationBar() {
   return (
@@ -9,7 +8,7 @@ function NavigationBar() {
       <div className='row'>
         <div className='col-12'>
           <div className="alert alert-warning text-center font-weight-bold text-wrap" role="alert">
-            TAF
+            My To Do List
           </div>
         </div>
       </div>
@@ -21,7 +20,7 @@ function NavigationBar() {
               id="tabs-icons-text" 
               role="tablist">
               <li className="nav-item">
-                <NavLink 
+                <Link 
                   to='/todo' 
                   activeClassName='active-link'
                   className="nav-link mb-sm-3 mb-md-0 nav-link-info bg-danger text-white font-weight-bold" 
@@ -33,10 +32,10 @@ function NavigationBar() {
                   aria-selected="true">
                     <i class="ni ni-cloud-upload-96 mr-2"></i>
                   À faire
-                </NavLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <NavLink 
+                <Link 
                   to='/doing' 
                   activeClassName='active-link'
                   className="nav-link mb-sm-3 mb-md-0 bg-info text-white font-weight-bold" 
@@ -47,10 +46,10 @@ function NavigationBar() {
                   aria-controls="tabs-icons-text-2" 
                   ><i className="ni ni-bell-55 mr-2"></i>
                   En cours
-                </NavLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <NavLink 
+                <Link 
                   to='/done' 
                   activeClassName='active-link'
                   className="nav-link mb-sm-3 mb-md-0 bg-success text-white font-weight-bold" 
@@ -61,7 +60,7 @@ function NavigationBar() {
                   aria-controls="tabs-icons-text-3" 
                   aria-selected="false"><i className="ni ni-calendar-grid-58 mr-2"></i>
                   Fait
-                </NavLink>
+                </Link>
               </li>
             </ul>
           </div>

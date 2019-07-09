@@ -1,16 +1,21 @@
 const todoReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_TASK':
-    return [
-      ...state, action.payload
-    ];
+      return [
+        ...state, action.payload
+      ];
     case 'REMOVE_TASK':
       return [
         ...state.slice(0, action.payload),
         ...state.slice(action.payload+ 1)
       ];
-      case 'INIT_TASKS':
+    case 'INIT_TASKS':
       return action.payload;
+    case 'UPDATE_TASK':
+      let stateTemp = [...state];
+      const taskIndex = stateTemp.map(e => e.id).indexOf(action.payload.id);
+      stateTemp[taskIndex].category = action.payload.category;
+      return stateTemp;
     default:
       return state;
   }

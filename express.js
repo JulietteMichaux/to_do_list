@@ -19,7 +19,6 @@ app.use((req, res, next) => {
 
 app.post('/tasks', (req, res) => {
   const formData = req.body;
-  console.log(formData);
   connection.query('INSERT INTO tasks SET ?', formData, (err, results) => {
     if (err) {
       console.log(err);
@@ -32,7 +31,6 @@ app.post('/tasks', (req, res) => {
 
 app.get('/tasks', (req, res) => {
   connection.query('SELECT * FROM tasks', (err, results) => {
-  /*console.log(results);*/
   if (err) {
     console.log(err);
     res.status(500).send('error dans la récupération des todo');
@@ -44,7 +42,6 @@ app.get('/tasks', (req, res) => {
 
 app.get('/tasks/:id', (req, res) => {
   const idTodo = req.params.id;
-  console.log(idTodo);
   connection.query('SELECT * FROM tasks WHERE id = ?', [idTodo], (err, results) => {
     if (err) {
       console.log(err);
@@ -68,10 +65,11 @@ app.delete('/tasks/:id', (req, res) => {
 });
 
 app.put('/tasks/:id', (req, res) => {
-  const idTodo = req.params.id;
+  const idCategory = req.params.id;
   const formData = req.body;
   console.log(formData);
-  connection.query('UPDATE tasks SET ? WHERE id = ?', [formData, idTodo], (err, results) => {
+  console.log(idCategory);
+  connection.query(`UPDATE tasks SET ? WHERE id = ${idCategory}`, [formData], (err, results) => {
   if (err) {
     res.status(500).send('erreur de modif');
   } else {
@@ -79,7 +77,6 @@ app.put('/tasks/:id', (req, res) => {
   }
   });
 });
-
 
 app.listen(port, function () {
   console.log(`to_do_list is listening on port ${port}`)

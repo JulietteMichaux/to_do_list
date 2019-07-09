@@ -3,44 +3,70 @@ import './Todo.css';
 import { connect } from 'react-redux';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
 import axios from 'axios';
+import { updateCategory } from '../../Action/updateActions';
 
 function Todo(props) {
   
-  const [id, setId] = useState(0);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('todo');
+  const [category, setCategory] = useState('');
 
   const deleteTask = (id) => {
     console.log(id);
     axios.delete(`http://localhost:8000/tasks/${id}`)
   }
-  
+ 
+  const submitChangedCategory = (id) => {
+    axios.put(`http://localhost:8000/tasks/${id}`, {
+      category: category
+    })
+  } 
+
   return (
     <div className='container'>
       <div className='row'>
         <div className='col-10 offset-1'>
           {props.tasks.filter(task => task.category === 'todo').map((task, index) => {
             return(
-              <div>
-                <div className="alert alert-danger" role="alert">
-                  <h3 className='card-title text-white'>{task.title}</h3>
-                  <p className='card-text'>{task.description}</p> 
-                </div>
-                <div className='col-2 offset-10'>
-                  <button
-                    className="btn btn-secondary"
-                    onClick={() => {
-                      props.dispatch(removeTaskFromToDoList(index))
-                      deleteTask(task.id)
-                    }}
-                    >        
-                    Supprimer
-                  </button>
-                </div>
-                <br />
-              </div>
-            )})}
+              <div className='container'>
+                <div className='row'>
+                  <div className='col-12'>
+                    <div className="alert alert-danger" role="alert">
+                      <h3 className='card-title text-white'>{task.title}</h3>
+                      <p className='card-text'>{task.description}</p> 
+                      <select 
+                        className="form-control form-control-alternative" 
+                        onChange={(event) => setCategory(event.target.value)}
+                        >
+                        <option value='todo'>A faire</option>
+                        <option value='doing'>En cours</option>
+                        <option value='done'>Fait</option>
+                      </select>
+                      <button
+                      className="btn btn-success"
+                      onClick={() => {
+                        props.dispatch(updateCategory({id : task.id, category : category}));
+                        submitChangedCategory(task.id)
+                      }}>
+                        changer de catégorie
+                      </button>
+                    <br />
+                    <br />
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => {
+                          props.dispatch(removeTaskFromToDoList(index))
+                          deleteTask(task.id)
+                        }}
+                      >        
+                      Supprimer
+                    </button>
+                    </div>
+                  </div>
+                  </div>
+            <br />
+            </div>
+          )})}
         </div>
       </div>
     </div>
