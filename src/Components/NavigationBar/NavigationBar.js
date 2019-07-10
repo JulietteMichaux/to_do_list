@@ -3,12 +3,18 @@ import './NavigationBar.css';
 import { Link } from 'react-router-dom';
 
 function NavigationBar() {
+  
+  const style = {
+    color: 'DodgerBlue',
+    letterSpacing: 23
+  }
+
   return (
     <div className='container'>
       <div className='row'>
         <div className='col-12'>
-          <div className="alert alert-warning text-center font-weight-bold text-wrap" role="alert">
-            My To Do List
+          <div className="alert alert-warning text-center font-size-xl text-wrap " style={style} role="alert">
+            MY TO DO LIST
           </div>
         </div>
       </div>

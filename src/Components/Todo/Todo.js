@@ -43,7 +43,7 @@ function Todo(props) {
                         <option value='done'>Fait</option>
                       </select>
                       <button
-                      className="btn btn-success"
+                      className="btn btn-primary"
                       onClick={() => {
                         props.dispatch(updateCategory({id : task.id, category : category}));
                         submitChangedCategory(task.id)

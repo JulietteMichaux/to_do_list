@@ -22,7 +22,7 @@ function AddTask(props) {
     <div className='container'>
       <div className='row'>
         <div className='col-10 offset-1'>
-          <h6 class="card-title text-black font-weight-bold">Catégorie de la tâche</h6>
+          <h6 className="card-title text-primary font-weight-bold">Catégorie de la tâche</h6>
             <select 
               className="form-control form-control-alternative"
               onChange={(event) => setCategory(event.target.value)}
@@ -36,7 +36,7 @@ function AddTask(props) {
       <br />
       <div className='row'>
         <div className='col-10 offset-1'>
-        <h6 class="card-title text-black font-weight-bold">Ajout d'une tâche</h6>
+        <h6 class="card-title text-primary font-weight-bold">Ajout d'une tâche</h6>
         </div>
       </div>
       <div className='row'>
@@ -66,7 +66,7 @@ function AddTask(props) {
       <div className='row'>
         <div className='col-1 offset-9'>
           <button
-            className="btn btn-success"
+            className="btn btn-primary"
             onClick={() => {
               props.dispatch(addTaskToToDoList({title : title, description : description, category : category}))
               submitTask()
