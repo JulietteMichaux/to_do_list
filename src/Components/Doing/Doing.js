@@ -7,8 +7,6 @@ import { updateCategory } from '../../Action/updateActions';
 
 function Doing(props) {
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
   const [category, setCategory] = useState('todo');
 
   const deleteTask = (id) => {
@@ -28,7 +26,7 @@ function Doing(props) {
         <div className='col-10 offset-1'>
           {props.tasks.filter(task => task.category === 'doing').map((task, index) => {
             return(
-              <div className='container'>
+              <div key={index} className='container'>
                 <div className='row'>
                   <div className='col-12'>
                     <div className="alert alert-info" role="alert">

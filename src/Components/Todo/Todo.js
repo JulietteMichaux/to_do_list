@@ -7,8 +7,6 @@ import { updateCategory } from '../../Action/updateActions';
 
 function Todo(props) {
   
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
 
   const deleteTask = (id) => {
@@ -28,7 +26,7 @@ function Todo(props) {
         <div className='col-10 offset-1'>
           {props.tasks.filter(task => task.category === 'todo').map((task, index) => {
             return(
-              <div className='container'>
+              <div key={index} className='container'>
                 <div className='row'>
                   <div className='col-12'>
                     <div className="alert alert-danger" role="alert">
@@ -71,7 +69,7 @@ function Todo(props) {
       </div>
     </div>
   )
-};
+}
 
 const mapStateToProps = state => ({
   tasks: state

@@ -36,7 +36,7 @@ function AddTask(props) {
       <br />
       <div className='row'>
         <div className='col-10 offset-1'>
-        <h6 class="card-title text-primary font-weight-bold">Ajout d'une tâche</h6>
+        <h6 className="card-title text-primary font-weight-bold">Ajout d'une tâche</h6>
         </div>
       </div>
       <div className='row'>

@@ -18,7 +18,6 @@ import { initTasksToDoList } from './Action/todoActions';
 
 axios.get('http://localhost:8000/tasks')
     .then((result) => {
-      console.log(result);
     store.dispatch(initTasksToDoList(result.data));
     })
 
