@@ -36,26 +36,31 @@ function Todo(props) {
   } 
 
   return (
-    <div className='container'>
+    // container
+    <div className='container'> 
       <div className='row'>
         <div className='col-10 offset-1'>
           {props.tasks.filter(task => task.category === 'todo').map((task, index) => {
             return(
+              //container du filter/map
               <div key={index} className='container'>
-                <div className='row'>
-                  <div className='col-12'>
-                    <div className="alert alert-danger" role="alert">
-                      <h3 className='card-title text-white'>{task.title}</h3>
-                      <p className='card-text'>{task.description}</p> 
-                      <select 
-                        className="form-control form-control-alternative" 
-                        onChange={(event) => setCategory(event.target.value)}
-                        >
-                        <option default value='todo'>A faire</option>
-                        <option value='doing'>En cours</option>
-                        <option value='done'>Fait</option>
-                      </select>
-                      <button
+                <div className="alert alert-danger" role="alert">
+                  <h3 className='card-title text-white'>{task.title}</h3>
+                  <p className='card-text'>{task.description}</p> 
+                  <div className='row'>
+                    <select // choix de la catégorie
+                      className="form-control form-control-alternative" 
+                      onChange={(event) => setCategory(event.target.value)}
+                      >
+                      <option default value='todo'>A faire</option>
+                      <option value='doing'>En cours</option>
+                      <option value='done'>Fait</option>
+                    </select>
+                  </div>
+                  <br />
+                  <div className='row'>
+                    <div className='col-4'>
+                      <button //bouton changement de catégorie
                       className="btn btn-primary"
                       onClick={() => {
                         props.dispatch(updateCategory({id : task.id, category : category}));
@@ -63,147 +68,143 @@ function Todo(props) {
                       }}>
                         changer de catégorie
                       </button>
-                    <br />
-                    <br />
-
-                    <button 
-                    type="button" 
-                    className="btn btn-primary" 
-                    data-toggle="modal" 
-                    data-target="#exampleModal"
-                    onClick={() => {
-                      toggle()
-                    }}>
-                    modifier la tâche
-                    </button>
-                    {isShowing ? 
-                  <div 
-                    className="modal fade show"
-                    id="exampleModal" 
-                    tabindex="-1" 
-                    role="dialog" 
-                    aria-labelledby="exampleModalLabel" 
-                    aria-modal="true"
-                    style={{display: 'block'}}
-                  >
-                    <div 
-                      className="modal-dialog" 
-                      role="document">
-                      <div 
-                        className="modal-content"
-                      >
-                        <div className="modal-header"> 
-                          <button 
-                            type="button text-center" 
-                            className="close" 
-                            data-dismiss="modal" 
-                            aria-label="Close"
-                            onClick={() => setIsShowing()}>fermer
-                          </button>
-                        </div>
-                        <div 
-                          className="modal-body">
-                          <input 
-                            className="form-control form-control-alternative bg-secondary" 
-                            placeholder="title" 
-                            type="text"
-                            value={task.title}
-                            onChange={(event) => setTitle(event.target.value)}
-                          /> 
-                          <input 
-                            className="form-control form-control-alternative bg-secondary" 
-                            placeholder="description" 
-                            type="text"
-                            value={task.description}
-                            onChange={(event) => setDescription(event.target.value)}
-                          />
-                        </div>
-                        <div 
-                          className="modal-footer">
-                          <button 
-                            type="button" 
-                            className="btn btn-primary"
-                            onClick={() => {
-                              props.dispatch(updateTitleDesc({id : task.id, title: title, description: description}));
-                              submitChangedTitleDesc(task.title, task.description)
-                            }}>
-                            Sauvegarder les modifications
-                          </button>
-                        </div>
-                      </div>
                     </div>
-                    </div>
-                   : /*2è argu ternaire*/
-                   <div 
-                    className="modal fade"
-                    id="exampleModal" 
-                    tabindex="-1" 
-                    role="dialog" 
-                    aria-labelledby="exampleModalLabel" 
-                    aria-hidden="true"
-                    style={{display: 'none'}}
-                  >
-                    <div 
-                      className="modal-dialog" 
-                      role="document">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5 
-                            className="modal-title" 
-                            id="exampleModalLabel"
-                          >titre
-                          </h5>
-                          <button 
-                            type="button" 
-                            className="close" 
-                            data-dismiss="modal" 
-                            aria-label="Close">fermer
-                          </button>
-                        </div>
-                        <div 
-                          //input onChange={(event) => setTitle(event.target.value)}
-                          //value={title}
-                          className="modal-body">
-                          description
-                        </div>
-                        <div 
-                          className="modal-footer">
-                          <button 
-                            type="button" 
-                            className="btn btn-secondary" 
-                            data-dismiss="modal"
-                            >CLOSE
-                          </button>
-                          <button 
-                            type="button" 
-                            className="btn btn-primary"
-                            >Sauvegarder les modifications
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  }
-                   
-
-                    <button
-                        className="btn btn-secondary"
+                    <div className='col-4'>
+                      <button //bouton modal
+                        type="button" 
+                        className="btn btn-primary" 
+                        data-toggle="modal" 
+                        data-target="#exampleModal"
                         onClick={() => {
-                          props.dispatch(removeTaskFromToDoList(index))
-                          deleteTask(task.id)
-                        }}
+                        toggle()
+                        }}>
+                        modifier la tâche
+                      </button>
+                      {isShowing ? //ternaire modal
+                        <div //1er argument ternaire
+                          className="modal fade show"
+                          id="exampleModal" 
+                          tabindex="-1" 
+                          role="dialog" 
+                          aria-labelledby="exampleModalLabel" 
+                          aria-modal="true"
+                          style={{display: 'block'}}
+                        >
+                          <div 
+                            className="modal-dialog" 
+                            role="document">
+                            <div 
+                              className="modal-content"
+                            >
+                              <div className="modal-header"> 
+                                <button //bouton fermeture modal
+                                  type="button text-center" 
+                                  className="close" 
+                                  data-dismiss="modal" 
+                                  aria-label="Close"
+                                  onClick={() => setIsShowing()}>fermer 
+                                </button>
+                              </div>
+                              <div 
+                                className="modal-body">
+                                <input 
+                                  className="form-control form-control-alternative bg-secondary" 
+                                  placeholder="title" 
+                                  type="text"
+                                  value={task.title}
+                                  onChange={(event) => setTitle(event.target.value)}
+                                /> 
+                                <input 
+                                  className="form-control form-control-alternative bg-secondary" 
+                                  placeholder="description" 
+                                  type="text"
+                                  value={task.description}
+                                  onChange={(event) => setDescription(event.target.value)}
+                                />
+                              </div>
+                              <div 
+                                className="modal-footer">
+                                <button 
+                                  type="button" 
+                                  className="btn btn-primary"
+                                  onClick={() => {
+                                    props.dispatch(updateTitleDesc({id : task.id, title: title, description: description}));
+                                    submitChangedTitleDesc(task.title, task.description)
+                                  }}>
+                                  Sauvegarder les modifications
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        : //2è argu ternaire
+                        <div 
+                          className="modal fade"
+                          id="exampleModal" 
+                          tabindex="-1" 
+                          role="dialog" 
+                          aria-labelledby="exampleModalLabel" 
+                          aria-hidden="true"
+                          style={{display: 'none'}}
+                        >
+                          <div 
+                            className="modal-dialog" 
+                            role="document">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h5 
+                                  className="modal-title" 
+                                  id="exampleModalLabel"
+                                >titre
+                                </h5>
+                                <button 
+                                  type="button" 
+                                  className="close" 
+                                  data-dismiss="modal" 
+                                  aria-label="Close">fermer
+                                </button>
+                              </div>
+                              <div
+                                className="modal-body">
+                                description
+                              </div>
+                              <div 
+                                className="modal-footer">
+                                <button 
+                                  type="button" 
+                                  className="btn btn-secondary" 
+                                  data-dismiss="modal"
+                                  >CLOSE
+                                </button>
+                                <button 
+                                  type="button" 
+                                  className="btn btn-primary"
+                                  >Sauvegarder les modifications
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div> //fin ternaire
+                        } 
+                    </div>
+                    <div className='col-4'>
+                      <button //bouton supprimer
+                          className="btn btn-secondary"
+                          onClick={() => {
+                            props.dispatch(removeTaskFromToDoList(index))
+                            deleteTask(task.id)
+                          }}
                       >        
-                      supprimer
-                    </button>
+                        supprimer
+                      </button>
                     </div>
                   </div>
-                  </div>
-            <br />
+              </div>
             </div>
           )})}
         </div>
       </div>
-    </div>
+      </div>
   )
 }
 
