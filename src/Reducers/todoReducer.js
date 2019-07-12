@@ -12,26 +12,19 @@ const todoReducer = (state = [], action) => {
     case 'INIT_TASKS':
       return action.payload;
     case 'UPDATE_TASK':
-      let stateTemp = [...state];
-      const taskIndex = stateTemp.map(e => e.id).indexOf(action.payload.id);
-      stateTemp[taskIndex].category = action.payload.category;
-      return stateTemp;
+      let stateTempTask = [...state];
+      const taskIndex = stateTempTask.map(e => e.id).indexOf(action.payload.id);
+      stateTempTask[taskIndex].category = action.payload.category;
+      return stateTempTask;
+    case 'UPDATE_TITLE_DESC':
+      let stateTempTitleDesc = [...state];
+      const taskIndexTitleDesc = stateTempTitleDesc.map(e => e.id).indexOf(action.payload.id);
+      stateTempTitleDesc[taskIndexTitleDesc].title = action.payload.title;
+      stateTempTitleDesc[taskIndexTitleDesc].description = action.payload.description;
+      return stateTempTitleDesc;
     default:
       return state;
   }
 }
 
 export default todoReducer;
-
-/**
- * La fonction cardReducer prend deux params
- *  - le state (valeur par défault)
- *  - l'action entrante
- *  dans le cas ou le type de l'action passé en param est 
- *  - ADD_ARTICLE 
- *    nous remplaçons la valeur du state par sa copie avec l'ajout du
- *    contenu de l'action (le nouvel article)
- *  - REMOVE_ARTICLE
- *    nous remplaçons la valeur du state par sa copie à laquelle nous avons supprimé 
- *    l'article passé en payload de l'action
- */

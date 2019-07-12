@@ -18,6 +18,11 @@ export const updateCategory = data => ({
   payload : data
 })
 
+export const updateTitleDesc = data => ({
+  type: 'UPDATE_TITLE_DESC',
+  payload: data
+})
+
 
 
 

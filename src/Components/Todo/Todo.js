@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { updateCategory } from '../../Action/todoActions';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
-
+import { updateTitleDesc } from '../../Action/todoActions';
 
 function Todo(props) {
   
@@ -17,8 +17,6 @@ function Todo(props) {
     setIsShowing(!isShowing);
   };
 
-  console.log(typeof(isShowing));
-
   const deleteTask = (id) => {
     console.log(id);
     axios.delete(`http://localhost:8000/tasks/${id}`)
@@ -30,6 +28,13 @@ function Todo(props) {
     })
   } 
  
+  const submitChangedTitleDesc = (id) => {
+    axios.put(`http://localhost:8000/tasks/${id}`, {
+      title: title,
+      description: description
+    })
+  } 
+
   return (
     <div className='container'>
       <div className='row'>
@@ -103,8 +108,8 @@ function Todo(props) {
                             placeholder="title" 
                             type="text"
                             value={task.title}
-                            onChange={(event) => setDescription(event.target.value)}
-                          />
+                            onChange={(event) => setTitle(event.target.value)}
+                          /> 
                           <input 
                             className="form-control form-control-alternative bg-secondary" 
                             placeholder="description" 
@@ -118,7 +123,11 @@ function Todo(props) {
                           <button 
                             type="button" 
                             className="btn btn-primary"
-                            >Sauvegarder les modifications
+                            onClick={() => {
+                              props.dispatch(updateTitleDesc({id : task.id, title: title, description: description}));
+                              submitChangedTitleDesc(task.title, task.description)
+                            }}>
+                            Sauvegarder les modifications
                           </button>
                         </div>
                       </div>
