@@ -71,12 +71,24 @@ app.put('/tasks/:id', (req, res) => {
   console.log(idCategory);
   connection.query(`UPDATE tasks SET ? WHERE id = ${idCategory}`, [formData], (err, results) => {
   if (err) {
-    res.status(500).send('erreur de modif');
+    res.status(500).send('erreur de modif id');
   } else {
     res.json(results);
   }
   });
 });
+
+/*app.put('/task/:id', (req, res) => {
+  const idTask = req.params.id;
+  const formData = req.body;
+  connection.query(`UPDATE task SET ? WHERE id = ${idTask}`, [formData], (err, results) =>{
+    if (err){
+      res.status(500).send('erreur de modif title et desc');
+    } else {
+      res.json(results);
+    }
+  });
+});*/
 
 app.listen(port, function () {
   console.log(`to_do_list is listening on port ${port}`)

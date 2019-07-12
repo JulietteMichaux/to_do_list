@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import './Todo.css';
 import { connect } from 'react-redux';
-import { removeTaskFromToDoList } from '../../Action/todoActions';
 import axios from 'axios';
-import { updateCategory } from '../../Action/updateActions';
+import { updateCategory } from '../../Action/todoActions';
+import { removeTaskFromToDoList } from '../../Action/todoActions';
+
 
 function Todo(props) {
   
   const [category, setCategory] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [isShowing, setIsShowing] = useState(false);
+
+  let toggle = () => {
+    setIsShowing(!isShowing);
+  };
+
+  console.log(typeof(isShowing));
 
   const deleteTask = (id) => {
     console.log(id);
@@ -19,7 +29,7 @@ function Todo(props) {
       category: category
     })
   } 
-
+ 
   return (
     <div className='container'>
       <div className='row'>
@@ -36,7 +46,7 @@ function Todo(props) {
                         className="form-control form-control-alternative" 
                         onChange={(event) => setCategory(event.target.value)}
                         >
-                        <option value='todo'>A faire</option>
+                        <option default value='todo'>A faire</option>
                         <option value='doing'>En cours</option>
                         <option value='done'>Fait</option>
                       </select>
@@ -50,6 +60,123 @@ function Todo(props) {
                       </button>
                     <br />
                     <br />
+
+                    <button 
+                    type="button" 
+                    className="btn btn-primary" 
+                    data-toggle="modal" 
+                    data-target="#exampleModal"
+                    onClick={() => {
+                      toggle()
+                    }}>
+                    modifier la tâche
+                    </button>
+                    {isShowing ? 
+                  <div 
+                    className="modal fade show"
+                    id="exampleModal" 
+                    tabindex="-1" 
+                    role="dialog" 
+                    aria-labelledby="exampleModalLabel" 
+                    aria-modal="true"
+                    style={{display: 'block'}}
+                  >
+                    <div 
+                      className="modal-dialog" 
+                      role="document">
+                      <div 
+                        className="modal-content"
+                      >
+                        <div className="modal-header"> 
+                          <button 
+                            type="button text-center" 
+                            className="close" 
+                            data-dismiss="modal" 
+                            aria-label="Close"
+                            onClick={() => setIsShowing()}>fermer
+                          </button>
+                        </div>
+                        <div 
+                          className="modal-body">
+                          <input 
+                            className="form-control form-control-alternative bg-secondary" 
+                            placeholder="title" 
+                            type="text"
+                            value={task.title}
+                            onChange={(event) => setDescription(event.target.value)}
+                          />
+                          <input 
+                            className="form-control form-control-alternative bg-secondary" 
+                            placeholder="description" 
+                            type="text"
+                            value={task.description}
+                            onChange={(event) => setDescription(event.target.value)}
+                          />
+                        </div>
+                        <div 
+                          className="modal-footer">
+                          <button 
+                            type="button" 
+                            className="btn btn-primary"
+                            >Sauvegarder les modifications
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                   : /*2è argu ternaire*/
+                   <div 
+                    className="modal fade"
+                    id="exampleModal" 
+                    tabindex="-1" 
+                    role="dialog" 
+                    aria-labelledby="exampleModalLabel" 
+                    aria-hidden="true"
+                    style={{display: 'none'}}
+                  >
+                    <div 
+                      className="modal-dialog" 
+                      role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 
+                            className="modal-title" 
+                            id="exampleModalLabel"
+                          >titre
+                          </h5>
+                          <button 
+                            type="button" 
+                            className="close" 
+                            data-dismiss="modal" 
+                            aria-label="Close">fermer
+                          </button>
+                        </div>
+                        <div 
+                          //input onChange={(event) => setTitle(event.target.value)}
+                          //value={title}
+                          className="modal-body">
+                          description
+                        </div>
+                        <div 
+                          className="modal-footer">
+                          <button 
+                            type="button" 
+                            className="btn btn-secondary" 
+                            data-dismiss="modal"
+                            >CLOSE
+                          </button>
+                          <button 
+                            type="button" 
+                            className="btn btn-primary"
+                            >Sauvegarder les modifications
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  }
+                   
+
                     <button
                         className="btn btn-secondary"
                         onClick={() => {
@@ -57,7 +184,7 @@ function Todo(props) {
                           deleteTask(task.id)
                         }}
                       >        
-                      Supprimer
+                      supprimer
                     </button>
                     </div>
                   </div>

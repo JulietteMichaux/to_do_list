@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './Doing.css';
 import { connect } from 'react-redux';
-import { removeTaskFromToDoList } from '../../Action/todoActions';
 import axios from 'axios';
-import { updateCategory } from '../../Action/updateActions';
+import { removeTaskFromToDoList } from '../../Action/todoActions';
+import { updateCategory } from '../../Action/todoActions';
 
 function Doing(props) {
 
-  const [category, setCategory] = useState('todo');
+  const [category, setCategory] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const deleteTask = (id) => {
     console.log(id);
