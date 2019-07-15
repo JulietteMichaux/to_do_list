@@ -8,30 +8,39 @@ import { updateTitleDesc } from '../../Action/todoActions';
 
 function Todo(props) {
   
-  const [category, setCategory] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('todo');
+  // const [title, setTitle] = useState('');
+  // const [description, setDescription] = useState('');
   const [isShowing, setIsShowing] = useState(false);
+  const [titleModal, setTitleModal] = useState('');
+  const [descriptionModal, setDescriptionModal] = useState('');
+  const [idBddTaskSelected, setIdBddTaskSelected] = useState(0);
 
   let toggle = () => {
     setIsShowing(!isShowing);
   };
 
   const deleteTask = (id) => {
-    console.log(id);
     axios.delete(`http://localhost:8000/tasks/${id}`)
   }
- 
+  
+  const setModalValues = (id) => {
+    const taskIndex = props.tasks.map(taskbis => taskbis.id).indexOf(id);
+    setTitleModal(props.tasks[taskIndex].title);
+    setDescriptionModal(props.tasks[taskIndex].description);
+    setIdBddTaskSelected(id)
+  }
+
   const submitChangedCategory = (id) => {
-    axios.put(`http://localhost:8000/tasks/${id}`, {
+    axios.put(`http://localhost:8000/tasks/category/${id}`, {
       category: category
     })
   } 
  
-  const submitChangedTitleDesc = (id) => {
-    axios.put(`http://localhost:8000/tasks/${id}`, {
-      title: title,
-      description: description
+  const submitChangedTitleDesc = () => {
+    axios.put(`http://localhost:8000/tasks/content/${idBddTaskSelected}`, {
+      title: titleModal,
+      description: descriptionModal
     })
   } 
 
@@ -61,12 +70,12 @@ function Todo(props) {
                   <div className='row'>
                     <div className='col-4'>
                       <button //bouton changement de catégorie
-                      className="btn btn-primary"
-                      onClick={() => {
-                        props.dispatch(updateCategory({id : task.id, category : category}));
-                        submitChangedCategory(task.id)
-                      }}>
-                        changer de catégorie
+                        className="btn btn-primary"
+                        onClick={() => {
+                          props.dispatch(updateCategory({id : task.id, category : category}));
+                          submitChangedCategory(task.id)
+                        }}
+                        >changer de catégorie
                       </button>
                     </div>
                     <div className='col-4'>
@@ -76,135 +85,130 @@ function Todo(props) {
                         data-toggle="modal" 
                         data-target="#exampleModal"
                         onClick={() => {
-                        toggle()
-                        }}>
-                        modifier la tâche
+                          toggle();
+                          setModalValues(task.id);
+                        }}
+                        >modifier la tâche
                       </button>
-                      {isShowing ? //ternaire modal
-                        <div //1er argument ternaire
-                          className="modal fade show"
-                          id="exampleModal" 
-                          tabindex="-1" 
-                          role="dialog" 
-                          aria-labelledby="exampleModalLabel" 
-                          aria-modal="true"
-                          style={{display: 'block'}}
-                        >
-                          <div 
-                            className="modal-dialog" 
-                            role="document">
-                            <div 
-                              className="modal-content"
-                            >
-                              <div className="modal-header"> 
-                                <button //bouton fermeture modal
-                                  type="button text-center" 
-                                  className="close" 
-                                  data-dismiss="modal" 
-                                  aria-label="Close"
-                                  onClick={() => setIsShowing()}>fermer 
-                                </button>
-                              </div>
-                              <div 
-                                className="modal-body">
-                                <input 
-                                  className="form-control form-control-alternative bg-secondary" 
-                                  placeholder="title" 
-                                  type="text"
-                                  value={task.title}
-                                  onChange={(event) => setTitle(event.target.value)}
-                                /> 
-                                <input 
-                                  className="form-control form-control-alternative bg-secondary" 
-                                  placeholder="description" 
-                                  type="text"
-                                  value={task.description}
-                                  onChange={(event) => setDescription(event.target.value)}
-                                />
-                              </div>
-                              <div 
-                                className="modal-footer">
-                                <button 
-                                  type="button" 
-                                  className="btn btn-primary"
-                                  onClick={() => {
-                                    props.dispatch(updateTitleDesc({id : task.id, title: title, description: description}));
-                                    submitChangedTitleDesc(task.title, task.description)
-                                  }}>
-                                  Sauvegarder les modifications
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          </div>
-                        : //2è argu ternaire
-                        <div 
-                          className="modal fade"
-                          id="exampleModal" 
-                          tabindex="-1" 
-                          role="dialog" 
-                          aria-labelledby="exampleModalLabel" 
-                          aria-hidden="true"
-                          style={{display: 'none'}}
-                        >
-                          <div 
-                            className="modal-dialog" 
-                            role="document">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h5 
-                                  className="modal-title" 
-                                  id="exampleModalLabel"
-                                >titre
-                                </h5>
-                                <button 
-                                  type="button" 
-                                  className="close" 
-                                  data-dismiss="modal" 
-                                  aria-label="Close">fermer
-                                </button>
-                              </div>
-                              <div
-                                className="modal-body">
-                                description
-                              </div>
-                              <div 
-                                className="modal-footer">
-                                <button 
-                                  type="button" 
-                                  className="btn btn-secondary" 
-                                  data-dismiss="modal"
-                                  >CLOSE
-                                </button>
-                                <button 
-                                  type="button" 
-                                  className="btn btn-primary"
-                                  >Sauvegarder les modifications
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div> //fin ternaire
-                        } 
                     </div>
                     <div className='col-4'>
                       <button //bouton supprimer
-                          className="btn btn-secondary"
-                          onClick={() => {
-                            props.dispatch(removeTaskFromToDoList(index))
-                            deleteTask(task.id)
-                          }}
-                      >        
-                        supprimer
+                        className="btn btn-secondary"
+                        onClick={() => {
+                          props.dispatch(removeTaskFromToDoList(index))
+                          deleteTask(task.id)
+                        }}
+                        >supprimer
                       </button>
                     </div>
                   </div>
               </div>
             </div>
           )})}
+          {isShowing ? //ternaire modal
+            <div //1er argument ternaire
+              className="modal fade show"
+              id="exampleModal" 
+              tabindex="-1" 
+              role="dialog" 
+              aria-labelledby="exampleModalLabel" 
+              aria-modal="true"
+              style={{display: 'block'}}
+            >
+              <div 
+                className="modal-dialog" 
+                role="document">
+                <div className="modal-content">
+                  <div className="modal-header"> 
+                    <button //bouton fermeture modal
+                      type="button text-center" 
+                      className="close" 
+                      data-dismiss="modal" 
+                      aria-label="Close"
+                      onClick={() => setIsShowing()}>fermer 
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <input 
+                      className="form-control form-control-alternative bg-secondary" 
+                      placeholder="title" 
+                      type="text"
+                      value={titleModal}
+                      onChange={(event) => setTitleModal(event.target.value)}
+                    /> 
+                    <input 
+                      className="form-control form-control-alternative bg-secondary" 
+                      placeholder="description" 
+                      type="text"
+                      value={descriptionModal}
+                      onChange={(event) => setDescriptionModal(event.target.value)}
+                    />
+                  </div>
+                  <div className="modal-footer">
+                    <button 
+                      type="button" 
+                      className="btn btn-primary"
+                      onClick={() => {
+                        props.dispatch(updateTitleDesc({id : idBddTaskSelected, title: titleModal, description: descriptionModal}));
+                        submitChangedTitleDesc()
+                        toggle()
+                      }}
+                      >Sauvegarder les modifications
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            : //2è argu ternaire
+            <div 
+              className="modal fade"
+              id="exampleModal" 
+              tabindex="-1" 
+              role="dialog" 
+              aria-labelledby="exampleModalLabel" 
+              aria-hidden="true"
+              style={{display: 'none'}}
+            >
+              <div 
+                className="modal-dialog" 
+                role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 
+                      className="modal-title" 
+                      id="exampleModalLabel"
+                      >titre
+                    </h5>
+                    <button 
+                      type="button" 
+                      className="close" 
+                      data-dismiss="modal" 
+                      aria-label="Close">fermer
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    description
+                  </div>
+                  <div className="modal-footer">
+                    <button 
+                      type="button" 
+                      className="btn btn-secondary" 
+                      data-dismiss="modal"
+                      >CLOSE
+                    </button>
+                    <button 
+                      type="button" 
+                      className="btn btn-primary"
+                      >Sauvegarder les modifications
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div> //fin ternaire
+            } 
         </div>
       </div>
-      </div>
+    </div>
   )
 }
 

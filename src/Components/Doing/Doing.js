@@ -6,19 +6,40 @@ import { removeTaskFromToDoList } from '../../Action/todoActions';
 import { updateCategory } from '../../Action/todoActions';
 
 function Doing(props) {
-
+  
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [isShowing, setIsShowing] = useState(false);
+  const [titleModal, setTitleModal] = useState('');
+  const [descriptionModal, setDescriptionModal] = useState('');
+  const [idBddTaskSelected, setIdBddTaskSelected] = useState(0);
+
+  let toggle = () => {
+    setIsShowing(!isShowing);
+  };
 
   const deleteTask = (id) => {
-    console.log(id);
     axios.delete(`http://localhost:8000/tasks/${id}`)
+  }
+  
+  const setModalValues = (id) => {
+    const taskIndex = props.tasks.map(taskbis => taskbis.id).indexOf(id);
+    setTitleModal(props.tasks[taskIndex].title);
+    setDescriptionModal(props.tasks[taskIndex].description);
+    setIdBddTaskSelected(id)
   }
 
   const submitChangedCategory = (id) => {
-    axios.put(`http://localhost:8000/tasks/${id}`, {
+    axios.put(`http://localhost:8000/tasks/category/${id}`, {
       category: category
+    })
+  } 
+ 
+  const submitChangedTitleDesc = () => {
+    axios.put(`http://localhost:8000/tasks/content/${idBddTaskSelected}`, {
+      title: titleModal,
+      description: descriptionModal
     })
   } 
 

@@ -1,0 +1,5 @@
+.row-boutons {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-around !important;
+}

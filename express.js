@@ -32,7 +32,6 @@ app.post('/tasks', (req, res) => {
 app.get('/tasks', (req, res) => {
   connection.query('SELECT * FROM tasks', (err, results) => {
   if (err) {
-    console.log(err);
     res.status(500).send('error dans la récupération des todo');
    } else {
       res.json(results);
@@ -44,7 +43,6 @@ app.get('/tasks/:id', (req, res) => {
   const idTodo = req.params.id;
   connection.query('SELECT * FROM tasks WHERE id = ?', [idTodo], (err, results) => {
     if (err) {
-      console.log(err);
       res.status(500).send('todo par id non récupérée');
     } else {
       res.json(results);
@@ -54,7 +52,6 @@ app.get('/tasks/:id', (req, res) => {
 
 app.delete('/tasks/:id', (req, res) => {
   const idTasks = req.params.id
-  console.log(idTasks);
   connection.query(`DELETE FROM tasks WHERE id = ${idTasks}`, err => {
     if (err){
       res.status(500).send('smurf');
@@ -64,11 +61,9 @@ app.delete('/tasks/:id', (req, res) => {
   });
 });
 
-app.put('/tasks/:id', (req, res) => {
+app.put('/tasks/category/:id', (req, res) => {
   const idCategory = req.params.id;
   const formData = req.body;
-  console.log(formData);
-  console.log(idCategory);
   connection.query(`UPDATE tasks SET ? WHERE id = ${idCategory}`, [formData], (err, results) => {
   if (err) {
     res.status(500).send('erreur de modif id');
@@ -78,17 +73,19 @@ app.put('/tasks/:id', (req, res) => {
   });
 });
 
-/*app.put('/task/:id', (req, res) => {
+app.put('/tasks/content/:id', (req, res) => {
+  console.log(req.body, req.params);
   const idTask = req.params.id;
   const formData = req.body;
-  connection.query(`UPDATE task SET ? WHERE id = ${idTask}`, [formData], (err, results) =>{
+  connection.query(`UPDATE tasks SET ? WHERE id = ${idTask}`, [formData], (err, results) =>{
     if (err){
+      console.log(err);
       res.status(500).send('erreur de modif title et desc');
     } else {
       res.json(results);
     }
   });
-});*/
+});
 
 app.listen(port, function () {
   console.log(`to_do_list is listening on port ${port}`)
