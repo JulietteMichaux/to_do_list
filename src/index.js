@@ -22,8 +22,7 @@ axios.get('http://localhost:8000/tasks')
     })
 
 const store = createStore(
-    todoReducer, 
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    todoReducer
   );
 
 ReactDOM.render(
