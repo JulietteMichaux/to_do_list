@@ -95,7 +95,8 @@ function Todo(props) {
                       <button //bouton supprimer
                         className="btn btn-secondary"
                         onClick={() => {
-                          props.dispatch(removeTaskFromToDoList({index}))
+                          props.dispatch(removeTaskFromToDoList(task.id))
+                          console.log()
                           deleteTask(task.id)
                         }}
                         >supprimer

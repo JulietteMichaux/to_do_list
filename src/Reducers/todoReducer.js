@@ -5,9 +5,12 @@ const todoReducer = (state = [], action) => {
         ...state, action.payload
       ];
     case 'REMOVE_TASK':
+      const taskIndexRemove = state.map(e => e.id).indexOf(action.payload);  
+      console.log(taskIndexRemove)
+      console.log(action.payload)
       return [
-        ...state.slice(0, action.payload),
-        ...state.slice(action.payload+ 1)
+        ...state.slice(0, taskIndexRemove),
+        ...state.slice(taskIndexRemove + 1)
       ];
     case 'INIT_TASKS':
       return action.payload;
