@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import axios from 'axios';
+import apiurl from './App.conf';
 
 //CSS
 import './argon.min.css';
@@ -16,7 +17,7 @@ import todoReducer from './Reducers/todoReducer';
 // import d'une action
 import { initTasksToDoList } from './Action/todoActions';
 
-axios.get('http://localhost:8000/tasks')
+axios.get(`${apiurl}/tasks`)
     .then((result) => {
     store.dispatch(initTasksToDoList(result.data));
     })

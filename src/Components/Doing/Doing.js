@@ -5,6 +5,7 @@ import axios from 'axios';
 import { updateCategory } from '../../Action/todoActions';
 import { removeTaskFromToDoList } from '../../Action/todoActions';
 import { updateTitleDesc } from '../../Action/todoActions';
+import apiurl  from '../../App.conf';
 
 function Doing(props) {
   
@@ -21,7 +22,7 @@ function Doing(props) {
   };
 
   const deleteTask = (id) => {
-    axios.delete(`http://localhost:8000/tasks/${id}`)
+    axios.delete(`${apiurl}/tasks/${id}`)
   }
   
   const setModalValues = (id) => {
@@ -32,13 +33,13 @@ function Doing(props) {
   }
 
   const submitChangedCategory = (id) => {
-    axios.put(`http://localhost:8000/tasks/category/${id}`, {
+    axios.put(`${apiurl}/tasks/category/${id}`, {
       category: category
     })
   } 
  
   const submitChangedTitleDesc = () => {
-    axios.put(`http://localhost:8000/tasks/content/${idBddTaskSelected}`, {
+    axios.put(`${apiurl}/tasks/content/${idBddTaskSelected}`, {
       title: titleModal,
       description: descriptionModal
     })

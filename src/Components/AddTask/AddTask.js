@@ -8,7 +8,7 @@ function AddTask(props) {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('todo');
 
   const submitTask = () => {
     axios.post('http://localhost:8000/tasks', {
