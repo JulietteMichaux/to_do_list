@@ -15,10 +15,10 @@ function App(props) {
       <NavigationBar />
       <AddTask />
       <br />
-      <Route exact path="/" component={Home} />
-      <Route path="/todo" component={Todo} />
-      <Route path="/doing" component={Doing} />
-      <Route path="/done" component={Done} />
+      <Route exact path={`${process.env.PUBLIC_URL}`} component={Home} />
+      <Route path={`${process.env.PUBLIC_URL}/todo`} component={Todo} />
+      <Route path={`${process.env.PUBLIC_URL}/doing`} component={Doing} />
+      <Route path={`${process.env.PUBLIC_URL}/done`} component={Done} />
     </div>
   );
 }

@@ -27,7 +27,7 @@ function NavigationBar() {
               role="tablist">
               <li className="nav-item">
                 <Link 
-                  to='/todo' 
+                  to={`${process.env.PUBLIC_URL}/todo`}
                   activeclassname='active-link'
                   className="nav-link mb-sm-3 mb-md-0 nav-link-info bg-danger text-white font-weight-bold" 
                   >
@@ -36,7 +36,7 @@ function NavigationBar() {
               </li>
               <li className="nav-item">
                 <Link 
-                  to='/doing' 
+                  to={`${process.env.PUBLIC_URL}/doing`} 
                   activeclassname='active-link'
                   className="nav-link mb-sm-3 mb-md-0 bg-info text-white font-weight-bold" 
                   >
@@ -45,7 +45,7 @@ function NavigationBar() {
               </li>
               <li className="nav-item">
                 <Link 
-                  to='/done' 
+                  to={`${process.env.PUBLIC_URL}/done`}
                   activeclassname='active-link'
                   className="nav-link mb-sm-3 mb-md-0 bg-success text-white font-weight-bold" 
                   >
