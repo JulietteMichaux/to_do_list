@@ -33,6 +33,7 @@ app.get('/tasks', (req, res) => {
   connection.query('SELECT * FROM tasks', (err, results) => {
   if (err) {
     res.status(500).send('error dans la récupération des todo');
+    console.log(err);
    } else {
       res.json(results);
     }
@@ -44,6 +45,7 @@ app.get('/tasks/:id', (req, res) => {
   connection.query('SELECT * FROM tasks WHERE id = ?', [idTodo], (err, results) => {
     if (err) {
       res.status(500).send('todo par id non récupérée');
+      console.log(err);
     } else {
       res.json(results);
     }
@@ -55,6 +57,7 @@ app.delete('/tasks/:id', (req, res) => {
   connection.query(`DELETE FROM tasks WHERE id = ${idTasks}`, err => {
     if (err){
       res.status(500).send('smurf');
+      console.log(err);
     } else {
       res.sendStatus(200);
     }
@@ -67,6 +70,7 @@ app.put('/tasks/category/:id', (req, res) => {
   connection.query(`UPDATE tasks SET ? WHERE id = ${idCategory}`, [formData], (err, results) => {
   if (err) {
     res.status(500).send('erreur de modif id');
+    console.log(err);
   } else {
     res.json(results);
   }
