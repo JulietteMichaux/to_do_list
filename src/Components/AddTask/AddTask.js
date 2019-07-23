@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './AddTask.css';
 import { addTaskToToDoList } from '../../Action/todoActions';
 import axios from 'axios';
+import apiurl from '../../App.conf';
 
 function AddTask(props) {
 
@@ -11,7 +12,7 @@ function AddTask(props) {
   const [category, setCategory] = useState('todo');
 
   const submitTask = () => {
-    axios.post('http://localhost:8000/tasks', {
+    axios.post(`${apiurl}/tasks`, {
       category: category,
       title: title,
       description: description
